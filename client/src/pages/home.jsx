@@ -20,7 +20,7 @@ const home = () => {
   return (
     <div style={{marginTop:"150px"}}>
       <Link to='./addcontact'>
-        <button classname="btn btn-contact">Add Contact</button>
+        <button classN  ame="btn btn-contact">Add Contact</button>
       </Link>
       <table className='styled-table'>
       <thead>

@@ -47,6 +47,10 @@
     color: black;
 }
 .btn-contact{
-    background-color: #e82764;
+    background-color: rgb(68, 68, 205);
+    margin: auto;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 6px 20px;
 }
