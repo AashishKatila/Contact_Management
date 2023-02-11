@@ -16,13 +16,20 @@ const AddEdit = () => {
 
   const navigate = useNavigate();
 
+  const {id} = useParams();
+
+  useEffect(() =>{
+    axios.get(`http://localhost:5000/api/get/${id}`)
+    .then((resp) => setState({...resp.data[0]}));
+  },[id]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !email || !contact) {
       toast.error("Please provide value into each input field");
     } else {
       axios
-        .post("http://localhost:5000/api/post", {
+        .post("http://localhost:5000/api/get", {
           name,
           email,
           contact
@@ -30,7 +37,12 @@ const AddEdit = () => {
         .then(() => {
           setState({ name: "", email: "", contact: "" });
         })
-        .catch((err) => toast.error(err.response.data));
+        .catch((err) => {
+          console.error(err);
+          toast.error(err.response.data);
+        });
+        // .catch((err) => toast.error(err.response.data));
+        toast.success("contact Added Successfully");
       setTimeout(() => navigate("/"), 500);
     }
   };
@@ -57,7 +69,7 @@ const AddEdit = () => {
           id="name"
           name="name"
           placeholder="Your name..."
-          value={name}
+          value={name || ""}
           onChange={handleInputChange}
         />
 
@@ -67,7 +79,7 @@ const AddEdit = () => {
           id="email"
           name="email"
           placeholder="Your email"
-          value={email}
+          value={email || ""}
           onChange={handleInputChange}
         />
 
@@ -77,7 +89,7 @@ const AddEdit = () => {
           id="contact"
           name="contact"
           placeholder="Your Contact Number"
-          value={contact}
+          value={contact || ""}
           onChange={handleInputChange}
         />
 
