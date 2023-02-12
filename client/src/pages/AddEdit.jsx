@@ -19,7 +19,8 @@ const AddEdit = () => {
   const {id} = useParams();
 
   useEffect(() =>{
-    axios.get(`http://localhost:5000/api/get/${id}`)
+    axios
+    .get(`http://localhost:5000/api/get/${id}`)
     .then((resp) => setState({...resp.data[0]}));
   },[id]);
 
@@ -28,8 +29,9 @@ const AddEdit = () => {
     if (!name || !email || !contact) {
       toast.error("Please provide value into each input field");
     } else {
-      axios
-        .post("http://localhost:5000/api/get", {
+      if(!id){
+        axios
+        .post("http://localhost:5000/api/post", {
           name,
           email,
           contact
@@ -38,11 +40,25 @@ const AddEdit = () => {
           setState({ name: "", email: "", contact: "" });
         })
         .catch((err) => {
-          console.error(err);
           toast.error(err.response.data);
         });
-        // .catch((err) => toast.error(err.response.data));
         toast.success("contact Added Successfully");
+      }else{
+        axios
+        .put(`http://localhost:5000/api/update/${id}`, {
+          name,
+          email,
+          contact
+        })
+        .then(() => {
+          setState({ name: "", email: "", contact: "" });
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+        toast.success("contact Updated Successfully");
+      }
+      
       setTimeout(() => navigate("/"), 500);
     }
   };
@@ -93,7 +109,7 @@ const AddEdit = () => {
           onChange={handleInputChange}
         />
 
-        <input type="submit" value="Save" />
+        <input type="submit" value={id ? "Update" : "Save"} />
         <Link to="/">
           <input type="button" value="Go Back" />
         </Link>

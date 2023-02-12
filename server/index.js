@@ -46,6 +46,29 @@ app.delete("/api/remove/:id", (req, res) => {
   });
 });
 
+app.get("/api/get/:id", (req, res) => {
+  const { id } = req.params;
+  const sqlGet = "SELECT * FROM contact_db WHERE id =?";
+  db.query(sqlGet, id, (error, result) => {
+    if (error) {
+      console.log(error);
+    }
+    res.send(result);
+  });
+});
+
+app.put("/api/update/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, email, contact } = req.body;
+  const sqlUpdate = "UPDATE contact_db SET name = ?, email = ?,contact = ? WHERE id =?";
+  db.query(sqlUpdate, [name,email,contact,id], (error, result) => {
+    if (error) {
+      console.log(error);
+    }
+    res.send(result);
+  });
+});
+
 app.get("/", (req, res) => {
   //     const sqlInsert = "INSERT INTO contact_db (name,email,contact) VALUES ('John','john@gmail.com',24242424)";
   //     db.query(sqlInsert,(err,result ) =>{

@@ -34,7 +34,8 @@
     border: none;
     color: #fff;
     padding: 5px 12px;
-    margin: 1px;
+    margin: 2px;
+    border-radius: 5px;
 }
 .btn-edit{
     background-color: green;
@@ -42,9 +43,11 @@
 .btn-delete{
     background-color: red;
 }
-.btn-view{
-    background-color: rgb(233, 233, 233);
-    color: black;
+.btn-edit:hover{
+    background-color: rgb(1, 74, 1);
+}
+.btn-delete:hover{
+    background-color: rgb(197, 64, 64);
 }
 .btn-contact{
     background-color: rgb(68, 68, 205);

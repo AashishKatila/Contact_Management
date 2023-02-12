@@ -43,8 +43,8 @@ const home = () => {
           {data.map((item, index) => {
             return (
               <tr key={item.id}>
-                {/* <th scope="row">{index + 1}</th> */}
-                <td>{item.id}</td>
+                <th scope="row">{index + 1}</th>
+                {/* <td>{item.id}</td> */}
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.contact}</td>
@@ -58,9 +58,6 @@ const home = () => {
                   >
                     Delete
                   </button>
-                  <Link to={`/view/${item.id}`}>
-                    <button className="btn btn-view">View</button>
-                  </Link>
                 </td>
               </tr>
             );
