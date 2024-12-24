@@ -6,6 +6,8 @@ const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const cors = require("cors"); // To access backend API
 
+const serverless = require("serverless-http");
+
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -81,3 +83,5 @@ app.get("/", (req, res) => {
 app.listen(5000, () => {
   console.log("Server is running on port 5000");
 });
+
+module.exports = serverless(app);
